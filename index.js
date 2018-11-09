@@ -18,7 +18,7 @@ var EventHandler = require('../../integration-builder/event-handler');
 var IdentityHandler = require('../../integration-builder/identity-handler');
 var Initialization = require('../../integration-builder/initialization');
 var SessionHandler = require('../../integration-builder/session-handler');
-var UserAttributeHandler = require('./integration-builder/user-attribute-handler');
+var UserAttributeHandler = require('../../integration-builder/user-attribute-handler');
 
 (function (window) {
     var name = Initialization.name,
