@@ -1,8 +1,9 @@
 {
-  "name": "mparticle-javascript-web-kit-wrapper",
-  "version": "1.0.0",
+  "name": "@mparticle/web-kit-wrapper",
+  "version": "1.0.0-rc2",
   "description": "mParticle wrapper for web kit integrations",
   "main": "index.js",
+  "unpkg": "@mparticle/web-kit-wrapper.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mparticle-integrations/mparticle-javascript-web-kit-wrapper.git"
@@ -12,5 +13,8 @@
   "bugs": {
     "url": "https://github.com/mparticle-integrations/mparticle-javascript-web-kit-wrapper/issues"
   },
-  "homepage": "https://github.com/mparticle-integrations/mparticle-javascript-web-kit-wrapper#readme"
+  "homepage": "https://github.com/mparticle-integrations/mparticle-javascript-web-kit-wrapper#readme",
+  "publishConfig": {
+      "access": "public"
+  }
 }
