@@ -194,8 +194,6 @@ var UserAttributeHandler = require('../../../integration-builder/user-attribute-
                 try {
                     if (method) {
                         IdentityHandler[identityMapping[method]](user, forwarderSettings);
-                    } else {
-                        IdentityHandler.onUserIdentified(user, forwarderSettings);
                     }
 
                     return 'Successfully set user Identity on forwarder ' + name;
