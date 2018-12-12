@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <title>mParticle Partner Integration Test App</title>
+      <script src="../../../mparticle-sdk-javascript/mparticle.js"></script>
+      <script>mParticle.isDevelopmentMode = true;window.mParticle.isTestEnvironment = true;</script>
+      <script src="../../../../test/end-to-end-testapp/build/compilation.js"></script>
+      <script src="../../../mocha/mocha.js"></script>
+      <script src="./mockhttprequest.js"></script>
+      <script src="./stubbing.js"></script>
+    </head>
+    <body>
+        <h2>mParticle Test App for End to End Testing</h2>
+        Open your console and type in commands such as mParticle.logEvent('testEvent'). In your 'Network' tab, there should be calls to check to see if the there are network calls to your SDK.
+
+        Common event logging methods can be found on our <a href="https://docs.mparticle.com/developers/sdk/javascript/event-tracking/">technical documentation site<a>.
+    </body>
+</html>

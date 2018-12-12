@@ -43,7 +43,12 @@ var UserAttributeHandler = require('../../../integration-builder/user-attribute-
 
         function initForwarder(settings, service, testMode, trackerId, userAttributes, userIdentities) {
             forwarderSettings = settings;
-            reportingService = service;
+            if (window.mParticle.isTestEnvironment) {
+                reportingService = function() {
+                };
+            } else {
+                reportingService = service;
+            }
 
             try {
                 Initialization.initForwarder(settings, testMode, userAttributes, userIdentities, processEvent, eventQueue, isInitialized);
