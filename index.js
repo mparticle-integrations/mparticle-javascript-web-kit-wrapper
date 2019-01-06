@@ -183,28 +183,78 @@ var UserAttributeHandler = require('../../../integration-builder/user-attribute-
 
         }
 
-        function onUserIdentified(user, method) {
-            var identityMapping = {
-                modify: 'onModifyCompleted',
-                identify: 'onIdentifyCompleted',
-                login: 'onLoginCompleted',
-                logout: 'onLogoutCompleted'
-            };
+        function onUserIdentified(user) {
             if (isInitialized) {
                 try {
-                    if (method) {
-                        IdentityHandler[identityMapping[method]](user, forwarderSettings);
-                    } else {
-                        IdentityHandler.onUserIdentified(user, forwarderSettings);
-                    }
+                    IdentityHandler.onUserIdentified(user);
 
-                    return 'Successfully set user Identity on forwarder ' + name;
+                    return 'Successfully called onUserIdentified on forwarder ' + name;
                 } catch (e) {
-                    return {error: 'Error setting user identity on forwarder ' + name + '; ' + e};
+                    return {error: 'Error calling onUserIdentified on forwarder ' + name + '; ' + e};
                 }
             }
             else {
                 return 'Can\'t set new user identities on forwader  ' + name + ', not initialized';
+            }
+        }
+
+        function onIdentifyComplete(user, filteredIdentityRequest) {
+            if (isInitialized) {
+                try {
+                    IdentityHandler.onIdentifyCompleted(user, filteredIdentityRequest);
+
+                    return 'Successfully called onIdentifyCompleted on forwarder ' + name;
+                } catch (e) {
+                    return {error: 'Error calling onIdentifyCompleted on forwarder ' + name + '; ' + e};
+                }
+            }
+            else {
+                return 'Can\'t call onIdentifyCompleted on forwader  ' + name + ', not initialized';
+            }
+        }
+
+        function onLoginComplete(user, filteredIdentityRequest) {
+            if (isInitialized) {
+                try {
+                    IdentityHandler.onLoginComplete(user, filteredIdentityRequest);
+
+                    return 'Successfully called onLoginComplete on forwarder ' + name;
+                } catch (e) {
+                    return {error: 'Error calling onLoginComplete on forwarder ' + name + '; ' + e};
+                }
+            }
+            else {
+                return 'Can\'t call onLoginComplete on forwader  ' + name + ', not initialized';
+            }
+        }
+
+        function onLogoutComplete(user, filteredIdentityRequest) {
+            if (isInitialized) {
+                try {
+                    IdentityHandler.onLogoutComplete(user, filteredIdentityRequest);
+
+                    return 'Successfully called onLogoutComplete on forwarder ' + name;
+                } catch (e) {
+                    return {error: 'Error calling onLogoutComplete on forwarder ' + name + '; ' + e};
+                }
+            }
+            else {
+                return 'Can\'t call onLogoutComplete on forwader  ' + name + ', not initialized';
+            }
+        }
+
+        function onModifyComplete(user, filteredIdentityRequest) {
+            if (isInitialized) {
+                try {
+                    IdentityHandler.onModifyComplete(user, filteredIdentityRequest);
+
+                    return 'Successfully called onModifyComplete on forwarder ' + name;
+                } catch (e) {
+                    return {error: 'Error calling onModifyComplete on forwarder ' + name + '; ' + e};
+                }
+            }
+            else {
+                return 'Can\'t call onModifyComplete on forwader  ' + name + ', not initialized';
             }
         }
 
@@ -214,6 +264,10 @@ var UserAttributeHandler = require('../../../integration-builder/user-attribute-
         this.removeUserAttribute = removeUserAttribute;
         this.onUserIdentified = onUserIdentified;
         this.setUserIdentity = setUserIdentity;
+        this.onIdentifyComplete = onIdentifyComplete;
+        this.onLoginComplete = onLoginComplete;
+        this.onLogoutComplete = onLogoutComplete;
+        this.onModifyComplete = onModifyComplete;
     };
 
     if (!window || !window.mParticle || !window.mParticle.addForwarder) {
