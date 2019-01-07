@@ -17,5 +17,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {}
+  "dependencies": {
+      "express": "^4.16.4"
+  }
 }

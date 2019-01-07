@@ -1,5 +1,5 @@
 var SDKSettings = require('../../../../test/end-to-end-testapp/settings.js');
-var name = require('../../../../integration-builder/initialization.js').name;
+var name = require('../../../../src/initialization.js').name;
 
 var config = {
     name: name,
