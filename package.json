@@ -1,6 +1,6 @@
 {
   "name": "@mparticle/web-kit-wrapper",
-  "version": "1.0.0-rc4",
+  "version": "1.0.0-rc5",
   "description": "mParticle wrapper for web kit integrations",
   "main": "index.js",
   "unpkg": "@mparticle/web-kit-wrapper.js",
@@ -17,5 +17,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {}
+  "dependencies": {
+      "express": "^4.16.4"
+  }
 }

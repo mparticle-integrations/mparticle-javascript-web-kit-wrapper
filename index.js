@@ -13,12 +13,12 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
-var CommerceHandler = require('../../../integration-builder/commerce-handler');
-var EventHandler = require('../../../integration-builder/event-handler');
-var IdentityHandler = require('../../../integration-builder/identity-handler');
-var Initialization = require('../../../integration-builder/initialization');
-var SessionHandler = require('../../../integration-builder/session-handler');
-var UserAttributeHandler = require('../../../integration-builder/user-attribute-handler');
+var CommerceHandler = require('../../../src/commerce-handler');
+var EventHandler = require('../../../src/event-handler');
+var IdentityHandler = require('../../../src/identity-handler');
+var Initialization = require('../../../src/initialization');
+var SessionHandler = require('../../../src/session-handler');
+var UserAttributeHandler = require('../../../src/user-attribute-handler');
 
 (function (window) {
     var name = Initialization.name,
@@ -263,6 +263,21 @@ var UserAttributeHandler = require('../../../integration-builder/user-attribute-
             }
         }
 
+        function setOptOut(isOptingOutBoolean) {
+            if (isInitialized) {
+                try {
+                    Initialization.setOptOut(isOptingOutBoolean);
+
+                    return 'Successfully called setOptOut on forwarder ' + name;
+                } catch (e) {
+                    return {error: 'Error calling setOptOut on forwarder ' + name + '; ' + e};
+                }
+            }
+            else {
+                return 'Can\'t call setOptOut on forwader  ' + name + ', not initialized';
+            }
+        }
+
         this.init = initForwarder;
         this.process = processEvent;
         this.setUserAttribute = setUserAttribute;
@@ -273,6 +288,7 @@ var UserAttributeHandler = require('../../../integration-builder/user-attribute-
         this.onLoginComplete = onLoginComplete;
         this.onLogoutComplete = onLogoutComplete;
         this.onModifyComplete = onModifyComplete;
+        this.setOptOut = setOptOut;
     };
 
     if (!window || !window.mParticle || !window.mParticle.addForwarder) {
