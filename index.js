@@ -13,6 +13,8 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
+
+var Common = require('../../../src/common');
 var CommerceHandler = require('../../../src/commerce-handler');
 var EventHandler = require('../../../src/event-handler');
 var IdentityHandler = require('../../../src/identity-handler');
@@ -40,9 +42,11 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
             eventQueue = [];
 
         self.name = Initialization.name;
+        self.common = new Common();
 
         function initForwarder(settings, service, testMode, trackerId, userAttributes, userIdentities) {
             forwarderSettings = settings;
+
             if (window.mParticle.isTestEnvironment) {
                 reportingService = function() {
                 };
@@ -51,7 +55,9 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
             }
 
             try {
-                Initialization.initForwarder(settings, testMode, userAttributes, userIdentities, processEvent, eventQueue, isInitialized);
+                Initialization.initForwarder(settings, testMode, userAttributes, userIdentities, processEvent, eventQueue, isInitialized, self.common);
+                self.eventHandler = new EventHandler(self.common);
+
                 isInitialized = true;
             } catch (e) {
                 console.log('Failed to initialize ' + name + ' - ' + e);
@@ -114,7 +120,7 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
 
         function logError(event) {
             try {
-                EventHandler.logError(event);
+                self.eventHandler.logError(event);
                 return true;
             } catch (e) {
                 return {error: 'Error logging error on forwarder ' + name + '; ' + e};
@@ -123,7 +129,7 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
 
         function logPageView(event) {
             try {
-                EventHandler.logPageView(event);
+                self.eventHandler.logPageView(event);
                 return true;
             } catch (e) {
                 return {error: 'Error logging page view on forwarder ' + name + '; ' + e};
@@ -132,7 +138,7 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
 
         function logEvent(event) {
             try {
-                EventHandler.logEvent(event);
+                self.eventHandler.logEvent(event);
                 return true;
             } catch (e) {
                 return {error: 'Error logging event on forwarder ' + name + '; ' + e};
@@ -289,6 +295,8 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
         this.onLogoutComplete = onLogoutComplete;
         this.onModifyComplete = onModifyComplete;
         this.setOptOut = setOptOut;
+
+        this.common = new Common();
     };
 
     if (!window || !window.mParticle || !window.mParticle.addForwarder) {
