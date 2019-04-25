@@ -295,8 +295,6 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
         this.onLogoutComplete = onLogoutComplete;
         this.onModifyComplete = onModifyComplete;
         this.setOptOut = setOptOut;
-
-        this.common = new Common();
     };
 
     if (!window || !window.mParticle || !window.mParticle.addForwarder) {
