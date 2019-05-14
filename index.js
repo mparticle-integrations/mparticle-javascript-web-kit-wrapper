@@ -57,6 +57,9 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
             try {
                 Initialization.initForwarder(settings, testMode, userAttributes, userIdentities, processEvent, eventQueue, isInitialized, self.common);
                 self.eventHandler = new EventHandler(self.common);
+                self.identityHandler = new IdentityHandler(self.common);
+                self.userAttributeHandler = new UserAttributeHandler(self.common);
+                self.commerceHandler = new CommerceHandler(self.common);
 
                 isInitialized = true;
             } catch (e) {
@@ -147,7 +150,7 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
 
         function logEcommerceEvent(event) {
             try {
-                CommerceHandler.logCommerceEvent(event);
+                self.commerceHandler.logCommerceEvent(event);
                 return true;
             } catch (e) {
                 return {error: 'Error logging purchase event on forwarder ' + name + '; ' + e};
@@ -157,7 +160,7 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
         function setUserAttribute(key, value) {
             if (isInitialized) {
                 try {
-                    UserAttributeHandler.onSetUserAttribute(key, value, forwarderSettings);
+                    self.userAttributeHandler.onSetUserAttribute(key, value, forwarderSettings);
                     return 'Successfully set user attribute on forwarder ' + name;
                 } catch (e) {
                     return 'Error setting user attribute on forwarder ' + name + '; ' + e;
@@ -170,7 +173,7 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
         function removeUserAttribute(key) {
             if (isInitialized) {
                 try {
-                    UserAttributeHandler.onRemoveUserAttribute(key, forwarderSettings);
+                    self.userAttributeHandler.onRemoveUserAttribute(key, forwarderSettings);
                     return 'Successfully removed user attribute on forwarder ' + name;
                 } catch (e) {
                     return 'Error removing user attribute on forwarder ' + name + '; ' + e;
@@ -183,7 +186,7 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
         function setUserIdentity(id, type) {
             if (isInitialized) {
                 try {
-                    IdentityHandler.onSetUserIdentity(forwarderSettings, id, type);
+                    self.identityHandler.onSetUserIdentity(forwarderSettings, id, type);
                     return 'Successfully set user Identity on forwarder ' + name;
                 } catch (e) {
                     return 'Error removing user attribute on forwarder ' + name + '; ' + e;
@@ -197,7 +200,7 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
         function onUserIdentified(user) {
             if (isInitialized) {
                 try {
-                    IdentityHandler.onUserIdentified(user);
+                    self.identityHandler.onUserIdentified(user);
 
                     return 'Successfully called onUserIdentified on forwarder ' + name;
                 } catch (e) {
@@ -212,11 +215,11 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
         function onIdentifyComplete(user, filteredIdentityRequest) {
             if (isInitialized) {
                 try {
-                    IdentityHandler.onIdentifyCompleted(user, filteredIdentityRequest);
+                    self.identityHandler.onIdentifyComplete(user, filteredIdentityRequest);
 
-                    return 'Successfully called onIdentifyCompleted on forwarder ' + name;
+                    return 'Successfully called onIdentifyComplete on forwarder ' + name;
                 } catch (e) {
-                    return {error: 'Error calling onIdentifyCompleted on forwarder ' + name + '; ' + e};
+                    return {error: 'Error calling onIdentifyComplete on forwarder ' + name + '; ' + e};
                 }
             }
             else {
@@ -227,7 +230,7 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
         function onLoginComplete(user, filteredIdentityRequest) {
             if (isInitialized) {
                 try {
-                    IdentityHandler.onLoginComplete(user, filteredIdentityRequest);
+                    self.identityHandler.onLoginComplete(user, filteredIdentityRequest);
 
                     return 'Successfully called onLoginComplete on forwarder ' + name;
                 } catch (e) {
@@ -242,7 +245,7 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
         function onLogoutComplete(user, filteredIdentityRequest) {
             if (isInitialized) {
                 try {
-                    IdentityHandler.onLogoutComplete(user, filteredIdentityRequest);
+                    self.identityHandler.onLogoutComplete(user, filteredIdentityRequest);
 
                     return 'Successfully called onLogoutComplete on forwarder ' + name;
                 } catch (e) {
@@ -257,7 +260,7 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
         function onModifyComplete(user, filteredIdentityRequest) {
             if (isInitialized) {
                 try {
-                    IdentityHandler.onModifyComplete(user, filteredIdentityRequest);
+                    self.identityHandler.onModifyComplete(user, filteredIdentityRequest);
 
                     return 'Successfully called onModifyComplete on forwarder ' + name;
                 } catch (e) {
@@ -272,7 +275,7 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
         function setOptOut(isOptingOutBoolean) {
             if (isInitialized) {
                 try {
-                    Initialization.setOptOut(isOptingOutBoolean);
+                    self.initialization.setOptOut(isOptingOutBoolean);
 
                     return 'Successfully called setOptOut on forwarder ' + name;
                 } catch (e) {
