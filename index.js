@@ -24,6 +24,7 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
 
 (function (window) {
     var name = Initialization.name,
+        moduleId = Initialization.moduleId,
         MessageType = {
             SessionStart: 1,
             SessionEnd: 2,
@@ -42,6 +43,7 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
             eventQueue = [];
 
         self.name = Initialization.name;
+        self.moduleId = Initialization.moduleId;
         self.common = new Common();
 
         function initForwarder(settings, service, testMode, trackerId, userAttributes, userIdentities) {
@@ -300,12 +302,29 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
         this.setOptOut = setOptOut;
     };
 
+    function getId() {
+        return moduleId;
+    }
+
+    function register(config) {
+        if (config.kits) {
+            config.kits[name] = {
+                constructor: constructor
+            };
+        }
+    }
+
     if (!window || !window.mParticle || !window.mParticle.addForwarder) {
         return;
     }
 
     window.mParticle.addForwarder({
         name: name,
-        constructor: constructor
+        constructor: constructor,
+        getId: getId
     });
+
+    module.exports = {
+        register: register
+    };
 })(window);
