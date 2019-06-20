@@ -6,7 +6,7 @@ export default {
     output: {
         format: 'umd',
         exports: 'named',
-        strict: false,
+        strict: true,
     },
     plugins: [
         resolve({
