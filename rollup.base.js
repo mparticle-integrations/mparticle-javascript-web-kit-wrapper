@@ -4,7 +4,7 @@ import resolve from 'rollup-plugin-node-resolve';
 export default {
     input: './node_modules/@mparticle/web-kit-wrapper/index.js',
     output: {
-        format: 'umd',
+        format: 'iife',
         exports: 'named',
         strict: true,
     },
