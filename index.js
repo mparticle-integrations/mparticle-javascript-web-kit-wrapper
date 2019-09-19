@@ -33,7 +33,8 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
             PageEvent: 4,
             CrashReport: 5,
             OptOut: 6,
-            Commerce: 16
+            Commerce: 16,
+            Media: 20
         };
 
     var constructor = function () {
@@ -87,6 +88,10 @@ var UserAttributeHandler = require('../../../src/user-attribute-handler');
                         reportEvent = logEcommerceEvent(event);
                     }
                     else if (event.EventDataType === MessageType.PageEvent) {
+                        reportEvent = logEvent(event);
+                    }
+                    else if (event.EventDataType === MessageType.Media) {
+                        // Kits should just treat Media Events as generic Events
                         reportEvent = logEvent(event);
                     }
                     if (reportEvent === true && reportingService) {
