@@ -30,7 +30,7 @@ mParticleEcommerceCartKeys.forEach(function(key){
     replaceFunction(mParticle.eCommerce.Cart, key);
 });
 
-mParticle.init('testAPIKey');
+mParticle.init('testAPIKey', window.mParticle.config);
 
 function replaceFunction(object, key) {
     if (typeof object[key] === 'function') {

@@ -23,4 +23,7 @@ var config = {
     excludeAnonymousUser: false
 };
 
-mParticle.configureForwarder(config);
+window.mParticle.config = window.mParticle.config || {};
+window.mParticle.config.workspaceToken = 'testkit';
+window.mParticle.config.requestConfig = false;
+window.mParticle.config.kitConfigs = [config];
