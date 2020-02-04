@@ -3,8 +3,12 @@
     <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
       <title>mParticle Partner Integration Test App</title>
-      <script src="../../../mparticle-sdk-javascript/mparticle.js"></script>
-      <script>mParticle.isDevelopmentMode = true;window.mParticle.isTestEnvironment = true;</script>
+      <script src="../../web-sdk/dist/mparticle.js"></script>
+      <script>
+        window.mParticle.config = window.mParticle.config || {};
+        window.mParticle.config.isDevelopmentMode = true;
+        window.mParticle.isTestEnvironment = true;
+      </script>
       <script src="../../../../test/end-to-end-testapp/build/compilation.js"></script>
       <script src="../../../mocha/mocha.js"></script>
       <script src="./mockhttprequest.js"></script>
