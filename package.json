@@ -1,6 +1,6 @@
 {
   "name": "@mparticle/web-kit-wrapper",
-  "version": "1.0.0-rc10",
+  "version": "1.0.1",
   "description": "mParticle wrapper for web kit integrations",
   "main": "index.js",
   "unpkg": "@mparticle/web-kit-wrapper.js",
