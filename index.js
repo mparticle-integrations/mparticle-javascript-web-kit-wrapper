@@ -52,7 +52,11 @@ var constructor = function() {
         testMode,
         trackerId,
         userAttributes,
-        userIdentities
+        userIdentities,
+        appVersion,
+        appName,
+        customFlags,
+        clientId
     ) {
         forwarderSettings = settings;
 
@@ -71,7 +75,11 @@ var constructor = function() {
                 processEvent,
                 eventQueue,
                 isInitialized,
-                self.common
+                self.common,
+                appVersion,
+                appName,
+                customFlags,
+                clientId
             );
             self.eventHandler = new EventHandler(self.common);
             self.identityHandler = new IdentityHandler(self.common);
