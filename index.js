@@ -476,14 +476,14 @@ function isObject(val) {
 
 function register(config) {
     if (!config) {
-        window.console.log(
+        console.log(
             'You must pass a config object to register the kit ' + name
         );
         return;
     }
 
     if (!isObject(config)) {
-        window.console.log(
+        console.log(
             "'config' must be an object. You passed in a " + typeof config
         );
         return;
@@ -499,17 +499,19 @@ function register(config) {
             constructor: constructor,
         };
     }
-    window.console.log(
+    console.log(
         'Successfully registered ' + name + ' to your mParticle configuration'
     );
 }
 
-if (window && window.mParticle && window.mParticle.addForwarder) {
-    window.mParticle.addForwarder({
-        name: name,
-        constructor: constructor,
-        getId: getId,
-    });
+if (typeof window !== 'undefined') {
+    if (window && window.mParticle && window.mParticle.addForwarder) {
+        window.mParticle.addForwarder({
+            name: name,
+            constructor: constructor,
+            getId: getId,
+        });
+    }
 }
 
 module.exports = {
