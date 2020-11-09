@@ -60,7 +60,10 @@ var constructor = function() {
     ) {
         forwarderSettings = settings;
 
-        if (window.mParticle.isTestEnvironment) {
+        if (
+            typeof window !== 'undefined' &&
+            window.mParticle.isTestEnvironment
+        ) {
             reportingService = function() {};
         } else {
             reportingService = service;
