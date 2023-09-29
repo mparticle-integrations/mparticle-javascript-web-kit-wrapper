@@ -2,6 +2,10 @@
 
 --
 
+#### 1.0.6 - 2023-09-29
+
+-   fix: Prevent logging events from always returning true [#18](https://github.com/mparticle-integrations/mparticle-javascript-web-kit-wrapper/pull/18)
+
 #### 1.0.5 - 2020-11-10
 
 -   Bugfix - Check window for node environment
