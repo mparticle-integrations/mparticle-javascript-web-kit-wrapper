@@ -513,4 +513,5 @@ if (typeof window !== 'undefined') {
 
 module.exports = {
     register: register,
+    name: name,
 };
